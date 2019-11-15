@@ -24,6 +24,9 @@ public class Main {
 
                     break;
 
+                case 0:
+                    break;
+
                 default:
                     System.out.println("Введена неверная команда, повторите ввод");
                     break;
