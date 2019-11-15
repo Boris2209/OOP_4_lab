@@ -4,6 +4,7 @@
 */
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 
 public class Task_1 {
@@ -95,13 +96,18 @@ public class Task_1 {
 •	Отобразить размер файла или папки объекта, указать единицу измерения. Прокомментировать вид файла – папка или файл.
 */
 
+        /*Довольно странная формулировка задания в первых двух пунктах. Буду это понимать так:
+        * Берем из предыдущего упражнения пути к 4 файлам. Сначала проверяем указывают ли они на объект и отображаем
+        * имя объектра и родительскую папку. Затем еще раз проверяем эти файлы, если они они содержат только путь к папке
+        * и веведем имя этой папки*/
+
         //проверим по-очереди F1 F2 F3
         try {
             //F1
             File F1 = new File("MyFile1.txt");
 
             if(Files.isRegularFile(F1.toPath())){
-                System.out.println(F1.toPath());
+                System.out.println(F1.getCanonicalPath());
             }
             else
                 System.out.println("Вывзывающий объект не содержит имя файла");
@@ -116,7 +122,7 @@ public class Task_1 {
             File F2 = new File("C:\\MyFile2.txt");
 
             if(Files.isRegularFile(F2.toPath())){
-                System.out.println(F2.toPath());
+                System.out.println(F2.getCanonicalPath());
             }
             else
                 System.out.println("Вывзывающий объект не содержит имя файла");
@@ -130,7 +136,7 @@ public class Task_1 {
             File F3 = new File("C:\\Test\\MyFile3.txt");
 
             if(Files.isRegularFile(F3.toPath())){
-                System.out.println(F3.toPath());
+                System.out.println(F3.getCanonicalPath());
             }
             else
                 System.out.println("Вывзывающий объект не содержит имя файла");
@@ -145,11 +151,169 @@ public class Task_1 {
             File F4 = new File("C:\\Первая\\Вторая\\Третья");
 
             if(Files.isRegularFile(F4.toPath())){
-                System.out.println(F4.toPath());
+                System.out.println(F4.getCanonicalPath());
             }
             else
                 System.out.println("Вывзывающий объект не содержит имя файла");
 
+        }catch (Exception io){
+            System.out.println("Error 4" + io);
+        }
+
+
+        System.out.println();
+
+        // теперь проверяем как путь как к папке
+        try {
+            //F1
+            File F1 = new File("MyFile1.txt");
+
+            if(Files.isDirectory(F1.toPath())){
+                System.out.println(F1.getName());
+            }
+            else
+                System.out.println("Вывзывающий объект не содержит имя директории");
+
+
+        }catch (Exception io){
+            System.out.println("Error 1" + io);
+        }
+
+        try {
+            //F2
+            File F2 = new File("C:\\MyFile2.txt");
+
+            if(Files.isDirectory(F2.toPath())){
+                System.out.println(F2.getName());
+            }
+            else
+                System.out.println("Вывзывающий объект не содержит имя директории");
+
+        }catch (Exception io){
+            System.out.println("Error 2" + io);
+        }
+
+        try {
+            //F3
+            File F3 = new File("C:\\Test\\MyFile3.txt");
+
+            if(Files.isDirectory(F3.toPath())){
+                System.out.println(F3.getName());
+            }
+            else
+                System.out.println("Вывзывающий объект не содержит имя директории");
+
+        }catch (Exception io){
+            System.out.println("Error 3" + io);
+        }
+
+
+        try {
+            //F4
+            File F4 = new File("C:\\Первая\\Вторая\\Третья");
+
+            if(Files.isDirectory(F4.toPath())){
+                System.out.println(F4.getName());
+            }
+            else
+                System.out.println("Вывзывающий объект не содержит имя директории");
+
+        }catch (Exception io){
+            System.out.println("Error 4" + io);
+        }
+
+
+        System.out.println();
+
+        try {
+            //проверим существует ли уже MyFile1.txt
+            File F1 = new File("MyFile1.txt");
+
+            if(F1.exists())
+                System.out.println("Файл MyFile1.txt уже существует");
+            else
+                System.out.println("Файл MyFile1.txt НЕ существует");
+        }catch (Exception io){
+            System.out.println("Error 1" + io);
+        }
+
+
+        System.out.println();
+
+        //2 последних пунтка упражнения можно объединить:
+        try {
+            //F1
+            File F1 = new File("MyFile1.txt");
+            //полный путь
+            System.out.println("Полный путь: "+F1.toPath());
+            //размер файла
+            System.out.println("Размер в байтах: "+F1.length());
+            //папка или файл?
+            if(F1.isFile())
+                System.out.println("Это файл\n");
+            else if (F1.isDirectory())
+                System.out.println("Это папка\n");
+            else {
+                throw new FileNotFoundException();
+            }
+
+        }catch (Exception io){
+            System.out.println("Error 1" + io);
+        }
+
+        try {
+            //F2
+            File F2 = new File("C:\\MyFile2.txt");
+            //полный путь
+            System.out.println("Полный путь: "+F2.toPath());
+            //размер файла
+            System.out.println("Размер в байтах: "+F2.length());
+            //папка или файл?
+            if(F2.isFile())
+                System.out.println("Это файл\n");
+            else if (F2.isDirectory())
+                System.out.println("Это папка\n");
+            else {
+                throw new FileNotFoundException();
+            }
+        }catch (Exception io){
+            System.out.println("Error 2" + io);
+        }
+
+        try {
+            //F3
+            File F3 = new File("C:\\Test\\MyFile3.txt");
+            //полный путь
+            System.out.println("Полный путь: "+F3.toPath());
+            //размер файла
+            System.out.println("Размер в байтах: "+F3.length());
+            //папка или файл?
+            if(F3.isFile())
+                System.out.println("Это файл\n");
+            else if (F3.isDirectory())
+                System.out.println("Это папка\n");
+            else {
+                throw new FileNotFoundException();
+            }
+        }catch (Exception io){
+            System.out.println("Error 3" + io);
+        }
+
+        try {
+            //F4
+            File F4 = new File("C:\\Первая\\Вторая\\Третья");
+            //полный путь
+            System.out.println("Полный путь: "+F4.toPath());
+            //размер файла
+            System.out.println("Размер в байтах: "+F4.length());
+            //папка или файл?
+            if(F4.isFile())
+                System.out.println("Это файл\n");
+            else if (F4.isDirectory())
+                System.out.println("Это папка\n");
+            else {
+                throw new FileNotFoundException();
+            }
         }catch (Exception io){
             System.out.println("Error 4" + io);
         }
@@ -203,20 +367,21 @@ public class Task_1 {
             System.out.print("Файлы папки приложения: ");
             int count_directory = 0;
             for(File path : paths){
-                System.out.print(path.getName()+" , ");
+                System.out.print(path.getName() + " , ");
                 if(path.isDirectory())
                     count_directory++;
             }
-            System.out.println("    Из них папок " + count_directory + "\n\n\n");
+            System.out.println("    Из них папок " + count_directory );
 
             F7.deleteOnExit();
 
 
         }catch (Exception io){
-            System.out.println("Error 7 "+io);
+            System.out.println("Error 7 " + io);
         }
 
         // все созданные файлы удаляются в конце с помощью метода deleteOnExit()
+        System.out.println("Все созданные файлы будут удалены после закрытия приложения" + "\n\n\n");
 
     }
 }
