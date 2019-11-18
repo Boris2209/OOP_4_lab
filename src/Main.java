@@ -8,7 +8,7 @@ public class Main {
         Task_2 t2 = new Task_2();
 
 
-        String main_menu_text = "1. Задание 1: Класс File\n2. Задание 2\n3. Задание 3\n0. Выход\n";
+        String main_menu_text = "1. Задание 1: Класс File\n2. Задание 2: Байтовые потоки\n3. Задание 3\n0. Выход\n";
         int job_program = -1;
         while (job_program!=0){
             System.out.println(main_menu_text);

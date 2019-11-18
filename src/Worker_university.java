@@ -1,5 +1,15 @@
-import java.util.Locale;
-
+/*
+* Вариант 8, Класс - Сотрудник вуза
+* Поля: Табельный номер, Фамилия, Имя, Адрес, Количество детей,
+Пол, Дата рождения
+* Дополнительные операции
+1) По табельному номеру, вернуть Фамилия, Имя, Пол, дату
+рождения
+2) Определить, одинаковое ли количество детей у двух
+сотрудников.
+* Доп заданиея
+* 1. Вывести список мужчин
+* 2. Удалить первую запись, заменив на последнюю*/
 //создаем класс исключения Ошибка Ввода
 class InputException extends Exception{}
 
@@ -8,7 +18,8 @@ public class Worker_university {
     private String sername;     //фамилия
     private String name;        //имя
     private String adress;      //адресс
-    private int num_child;      //количество детей
+    private String num_child;      //количество детей
+    private int n_c;
     private String gender;      //пол
     private String date;        //дата
 
@@ -22,12 +33,13 @@ public class Worker_university {
             this.name = name;
             this.adress = adress;
             try {
-                this.num_child = Integer.parseInt(num_child);
+                this.n_c = Integer.parseInt(num_child);
             } catch (Exception io){
                 throw new InputException();
             }
-            if(this.num_child<0)
+            if(this.n_c<0)
                 throw new InputException();
+            this.num_child = String.valueOf(n_c);
 
             //обрабатывается ввод латинсницей или кирилицей, заглавной и строчной. Хранится заглавной латиницей
             if((gender.toUpperCase()).equals("М") ||(gender.toUpperCase()).equals("M"))
@@ -55,7 +67,7 @@ public class Worker_university {
         return adress;
     }
 
-    public int getNum_child() {
+    public String getNum_child() {
         return num_child;
     }
 
@@ -65,5 +77,9 @@ public class Worker_university {
 
     public String getDate() {
         return date;
+    }
+
+    public String getWorker(){
+        return (t_number + " " + sername  + " " + name + " " + adress + " " + num_child + " " + getGender() + " " + date +"\n");
     }
 }
