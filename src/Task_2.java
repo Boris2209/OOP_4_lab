@@ -45,6 +45,8 @@ import java.util.Scanner;
 
 public class Task_2 {
 
+    //хранится список объектов из задания 4.3
+    LinkedList<Worker_university> list_works = new LinkedList<>();
 
     public void show_menu_2(){
         String main_menu_text = "\n1. Создать новые объекты и файл\n" +
@@ -61,6 +63,10 @@ public class Task_2 {
 
                 case 2:
                     input_file_objects();
+                    break;
+
+                case 3:
+                    randomAccessFile_task();
                     break;
 
                 case 0:
@@ -145,6 +151,7 @@ public class Task_2 {
         }
     }
 
+    //считывание и формирование списка по заданному условию
     private void input_file_objects(){
         try {
             Scanner inp = new Scanner(System.in);
@@ -183,13 +190,39 @@ public class Task_2 {
             for(Worker_university wor : list_worker){
                 System.out.print(wor.getWorker());
             }
+            list_works = list_worker;
 
         }catch (Exception io){
             System.out.println(io.toString());
         }
     }
 
+    private void randomAccessFile_task(){
+        try {
+            //создадим файл
+            RandomAccessFile file = new RandomAccessFile("seek.txt", "rw");
 
+            //добавляем построчно данные из 4.3
+            for (Worker_university wor : list_works){
+                file.writeUTF(wor.getT_number());
+                file.writeUTF(wor.getSername());
+                file.writeUTF(wor.getName());
+                file.writeUTF(wor.getAdress());
+                file.writeUTF(wor.getNum_child());
+                file.writeUTF(wor.getGender());
+                file.writeUTF(wor.getDate());
+            }
+            //"закроем файл для чистоты эксперимента"
+            file.close();
+            //откроем заново
+            file = new RandomAccessFile("seek.txt", "rw");
+
+            for(int i=0; i<file.length(); i++){
+                System.out.println(file.readUTF());
+            }
+
+        }catch (Exception io){}
+    }
 
 
 }
