@@ -1,10 +1,12 @@
 import java.io.*;
+import java.nio.charset.Charset;
 
 public class Task_3 {
 
     public void start_task_3(){
         work_1();
         work_2();
+        work_3();
     }
 
     /*Упражнение 1. Чтение из одного файла текстового файла и запись в
@@ -128,6 +130,8 @@ T2.txt. Для выполнения операции создайте цикл, 
             outb.close();
             out.close();
 
+            System.out.println("Успешно выполнено!");
+
         }catch (Exception io){
             System.out.println(io.toString());
         }
@@ -146,4 +150,41 @@ FileInputStream(&quot;Путь к файлу A.txt&quot;), &quot;Cp1251&quot;));
 System.out.println(Charset.defaultCharset().name());
 Реализуйте алгоритм чтения из файла текста через строковую
 переменну, пока вся информация не будет прочитана.*/
+
+    private void work_3(){
+        /*В общем смысл задания я понял так: есть два файла, один в кодировке UTF-8 другой - Ср1251
+        * Надо прочитать каждый своим способом (указав кодировку), иначе выводятся непонятные символы
+        * Файл А3 юудет в кодировке UTF8, файл А31 в Ср1251*/
+        try {
+            System.out.println("\n\nУпражнение 3:");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(new FileInputStream("A3.txt"), "UTF-8"));
+            System.out.println("Название кодировки, действующей в системе:");
+            System.out.println(Charset.defaultCharset().name());
+
+            int ch = in.read();
+            while (ch != -1){
+                System.out.print((char)ch);
+                ch = in.read();
+            }
+            System.out.println();
+            in.close();
+
+            BufferedReader in2 = new BufferedReader(
+                    new InputStreamReader(new FileInputStream("A31.txt"), "Cp1251"));
+            System.out.println("Название кодировки, действующей в системе:");
+            System.out.println(Charset.defaultCharset().name());
+
+            ch = in2.read();
+            while (ch != -1){
+                System.out.print((char)ch);
+                ch = in2.read();
+            }
+            System.out.println();
+            in2.close();
+
+        }catch (Exception io){
+            System.out.println(io.toString());
+        }
+    }
 }
